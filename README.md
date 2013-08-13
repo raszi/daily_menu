@@ -20,6 +20,8 @@ Or install it yourself as:
 
 ## Usage
 
+You need to set the `FACEBOOK_OAUTH_TOKEN` environment variable to the Facebook provided token to make it work.
+
     $ echo 'Budapest/Central' > '.daily_menurc'
     $ daily_menu
 

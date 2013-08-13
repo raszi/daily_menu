@@ -1,0 +1,42 @@
+- :name: 'Kőleves Étterem'
+  :scraper:
+    :class: Facebook
+    :params:
+      - 'Koleves'
+  :filter:
+    :class: Hungarian
+- :name: '400'
+  :scraper:
+    :class: Facebook
+    :params:
+      - '400bar.hu'
+  :filter:
+    :class: Hungarian
+- :name: 'Keksz'
+  :scraper:
+    :class: Facebook
+    :params:
+      - '268952226502652'
+  :filter:
+    :class: Hungarian
+- :name: 'Rézangyal Bistro'
+  :scraper:
+    :class: Facebook
+    :params:
+      - 'rezangyalmadach'
+  :filter:
+    :class: Hungarian
+- :name: 'Castro Bistro'
+  :scraper:
+    :class: Facebook
+    :params:
+      - 'castrobistro'
+  :filter:
+    :class: Hungarian
+- :name: 'Csináltam neked egy éttermet, és ez sem elég'
+  :scraper:
+    :class: Facebook
+    :params:
+      - 'CsinaltamNeked'
+  :filter:
+    :class: Hungarian

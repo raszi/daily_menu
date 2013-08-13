@@ -1,0 +1,7 @@
+Documentation:
+  Enabled: false
+LineLength:
+  Enabled: true
+  Max: 120
+MethodLength:
+  Max: 20

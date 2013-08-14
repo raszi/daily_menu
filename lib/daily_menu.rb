@@ -3,6 +3,7 @@ require 'daily_menu/version'
 module DailyMenu
   OAUTH_TOKEN = ENV['FACEBOOK_OAUTH_TOKEN'].freeze
   ROOT = Pathname.new(File.expand_path('../..', __FILE__)).freeze
+  CONFIG_DIR = ROOT.join('configs').freeze
 end
 
 require 'daily_menu/entry'

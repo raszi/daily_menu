@@ -32,7 +32,7 @@ module DailyMenu
     private_class_method :restaurants_for_location
 
     def self.configs_for_location(location)
-      config_file = ROOT.join('configs', "#{location}.yml")
+      config_file = CONFIG_DIR.join("#{location}.yml")
       raise %(No configuration found for: "#{location}") unless file_accessible?(config_file)
 
       YAML.load_file(config_file)

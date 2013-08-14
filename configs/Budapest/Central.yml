@@ -40,3 +40,10 @@
       - 'CsinaltamNeked'
   :filter:
     :class: Hungarian
+- :name: 'Suelto Cafe and Grill'
+  :scraper:
+    :class: Facebook
+    :params:
+      - 'sueltomama'
+  :filter:
+    :class: Hungarian

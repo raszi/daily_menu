@@ -8,11 +8,11 @@ module DailyMenu
 
   def self.menus_for(location)
     restaurants = DailyMenu.restaurants_for(location)
-    
+
     menus = []
 
     threads = restaurants.map do |restaurant|
-      thread = Thread.new do
+      Thread.new do
         menus << [restaurant, restaurant.menu]
       end
     end

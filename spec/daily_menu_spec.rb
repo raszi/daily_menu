@@ -31,11 +31,17 @@ describe DailyMenu do
 
       described_class.restaurants_for(location)
 
-      expect(YAML).to have_received(:load_file).with(%r(City/Area\.yml$))
+      expect(YAML).to have_received(:load_file).with(/City\/Area\.yml$/)
     end
 
     it 'should return with Restaruants' do
-      described_class.stub(:config_for) { [{ name: 'Test', scraper: { class: 'Facebook', params: '1', }, filter: { class: 'Hungarian' } }] }
+      described_class.stub(:config_for) do
+        [{
+          name: 'Test',
+          scraper: { class: 'Facebook', params: '1', },
+          filter: { class: 'Hungarian' }
+        }]
+      end
 
       restaurants = described_class.restaurants_for(location)
 

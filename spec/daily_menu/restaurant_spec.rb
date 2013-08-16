@@ -25,7 +25,14 @@ module DailyMenu
       end
 
       context 'when there are fetched entries' do
-        let(:entries) { [Entry.new('This is a menu entry', 2), Entry.new('This is not', 1), Entry.new('This is also a menu entry', 0)] }
+        let(:entries) do
+          [
+            Entry.new('This is a menu entry', 2),
+            Entry.new('This is not', 1),
+            Entry.new('This is also a menu entry', 0)
+          ]
+        end
+
         before do
           scraper.stub(:entries) { entries }
         end

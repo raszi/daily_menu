@@ -6,6 +6,22 @@ module DailyMenu
   ROOT = Pathname.new(File.expand_path('../..', __FILE__)).freeze
   CONFIG_DIR = ROOT.join('configs').freeze
 
+  def self.menus_for(location)
+    restaurants = DailyMenu.restaurants_for(location)
+    
+    menus = []
+
+    threads = restaurants.map do |restaurant|
+      thread = Thread.new do
+        menus << [restaurant, restaurant.menu]
+      end
+    end
+
+    threads.map(&:join)
+
+    menus
+  end
+
   def self.restaurants_for(location)
     raise ArgumentError, 'Location needed' unless location
 

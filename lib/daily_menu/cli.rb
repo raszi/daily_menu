@@ -10,10 +10,7 @@ module DailyMenu
     end
 
     def self.fetch(location)
-      menus = DailyMenu::restaurants_for(location).map do |restaurant|
-        [restaurant.name, restaurant.menu]
-      end
-
+      menus = DailyMenu.menus_for(location)
       Hash[menus]
     end
     private_class_method :fetch

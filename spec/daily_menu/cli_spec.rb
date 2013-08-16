@@ -15,9 +15,9 @@ module DailyMenu
         it 'should read the rc file' do
           rc_file = double('RC file', read: 'Foo/Bar')
 
-          described_class.stub(:file_accessible?) { true }
+          DailyMenu.stub(:file_accessible?) { true }
           File.stub(:new).with(described_class::RC_FILE) { rc_file }
-          described_class.stub(:configs_for_location) { [] }
+          DailyMenu.stub(:restaurants_for) { [] }
           described_class.stub(:ap)
 
           described_class.start([])

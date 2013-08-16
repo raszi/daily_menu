@@ -32,21 +32,34 @@ module DailyMenu
 
     describe '#entries' do
       before do
-        ::Koala::Facebook::API.any_instance.stub(:get_connections) { feed_items }
-        ::Koala::Facebook::API.any_instance.stub(:get_object) { { 'id' => user_id } }
+        Koala::Facebook::API.any_instance.stub(:get_object) { { 'id' => user_id } }
       end
 
-      it 'should create Entry items' do
-        entries = scraper.entries
+      context 'when an error occurs' do
+        it 'should raise RuntimeError' do
+          Koala::Facebook::API.any_instance.stub(:get_connections) { raise Koala::Facebook::ClientError.new(nil, nil) }
 
-        expect(entries.all? { |entry| entry.is_a?(Entry) }).to be_true
+          expect { scraper.entries }.to raise_error(RuntimeError)
+        end
       end
 
-      it 'should fetch the entries of the specified user from Facebook' do
-        entries = scraper.entries
+      context 'when there are no errors' do
+        before do
+          Koala::Facebook::API.any_instance.stub(:get_connections) { feed_items }
+        end
 
-        expect(entries).to have(2).entries
-        expect(entries).to include(Entry.new(greeting_text, greeting_time), Entry.new(daily_menu_text, daily_menu_time))
+        it 'should create Entry items' do
+          entries = scraper.entries
+
+          expect(entries.all? { |entry| entry.is_a?(Entry) }).to be_true
+        end
+
+        it 'should fetch the entries of the specified user from Facebook' do
+          entries = scraper.entries
+
+          expect(entries).to have(2).entries
+          expect(entries).to include(Entry.new(greeting_text, greeting_time), Entry.new(daily_menu_text, daily_menu_time))
+        end
       end
     end
   end

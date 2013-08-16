@@ -14,6 +14,10 @@ module DailyMenu
         .get_connections(user_id, 'feed')
         .select { |feed_item| feed_item['from']['id'] == user_id && feed_item['message'] }
         .map { |entry| Entry.new(entry['message'], parse_time(entry['created_time'])) }
+    rescue Koala::Facebook::ClientError => e
+      error = RuntimeError.new(e.message)
+      error.set_backtrace(e.backtrace)
+      raise error
     end
 
     def user_id

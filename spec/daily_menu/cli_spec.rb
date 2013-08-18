@@ -34,6 +34,61 @@ module DailyMenu
         end
       end
 
+      context 'when there are fetched menus' do
+        let(:location) { double('Location') }
+        let(:restaurant) { double('Restaurant', name: 'Name') }
+        let(:entry) { double('Entry', content: 'Content', time: DateTime.now) }
+        let(:menus) { [[restaurant, entry]] }
+
+        before do
+          DailyMenu.stub(:menus_for).with(location) { menus }
+        end
+
+        context 'and using terminal' do
+          before do
+            STDOUT.stub(:tty?) { true }
+          end
+
+          it 'should use the ColoredFormatter' do
+            ColoredFormatter.stub(:print)
+
+            described_class.start([location])
+
+            expect(ColoredFormatter).to have_received(:print).with(restaurant, entry)
+          end
+
+          it 'should print out to console' do
+            STDOUT.stub(:puts)
+
+            described_class.start([location])
+
+            expect(STDOUT).to have_received(:puts).at_least(:once)
+          end
+        end
+
+        context 'and using pipe' do
+          before do
+            STDOUT.stub(:tty?) { false }
+          end
+
+          it 'should use the MarkdownFormatter' do
+            MarkdownFormatter.stub(:print)
+
+            described_class.start([location])
+
+            expect(MarkdownFormatter).to have_received(:print).with(restaurant, entry)
+          end
+
+          it 'should print out to console' do
+            STDOUT.stub(:puts)
+
+            described_class.start([location])
+
+            expect(STDOUT).to have_received(:puts).at_least(:once)
+          end
+        end
+      end
+
     end
   end
 end

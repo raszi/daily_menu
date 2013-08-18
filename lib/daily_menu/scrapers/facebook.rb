@@ -13,7 +13,7 @@ module DailyMenu
       @api
         .get_connections(user_id, 'feed')
         .select { |feed_item| feed_item['from']['id'] == user_id && feed_item['message'] }
-        .map { |entry| Entry.new(entry['message'], parse_time(entry['created_time'])) }
+        .map { |entry| Entry.new(strip_content(entry['message']), parse_time(entry['created_time'])) }
     rescue Koala::Facebook::ClientError => e
       error = RuntimeError.new(e.message)
       error.set_backtrace(e.backtrace)
@@ -29,6 +29,11 @@ module DailyMenu
       DateTime.parse(time).new_offset(0)
     end
     private :parse_time
+
+    def strip_content(message)
+      message.gsub("\r\n", "\n")
+    end
+    private :strip_content
 
   end
 end

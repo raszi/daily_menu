@@ -56,9 +56,13 @@ module DailyMenu
 
         it 'should fetch the entries of the specified user from Facebook' do
           entries = scraper.entries
+          expected_entries = [
+            Entry.new(greeting_text, greeting_time),
+            Entry.new(daily_menu_text, daily_menu_time)
+          ]
 
           expect(entries).to have(2).entries
-          expect(entries).to include(Entry.new(greeting_text, greeting_time), Entry.new(daily_menu_text, daily_menu_time))
+          expect(entries).to include(*expected_entries)
         end
       end
     end

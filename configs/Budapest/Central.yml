@@ -47,3 +47,10 @@
       - 'sueltomama'
   :filter:
     :class: Hungarian
+- :name: 'Cafe Vian Gozsdu'
+  :scraper:
+    :class: Facebook
+    :params:
+      - '179130202109'
+  :filter:
+    :class: Hungarian

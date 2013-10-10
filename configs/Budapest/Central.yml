@@ -19,13 +19,6 @@
       - '268952226502652'
   :filter:
     :class: Hungarian
-- :name: 'Rézangyal Bistro'
-  :scraper:
-    :class: Facebook
-    :params:
-      - 'rezangyalmadach'
-  :filter:
-    :class: Hungarian
 - :name: 'Castro Bistro'
   :scraper:
     :class: Facebook
